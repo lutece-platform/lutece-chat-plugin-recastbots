@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Plugin recastbots</title>
+    </properties>
+    <body>
+        <section name="Plugin recastbots">
+            <!--
+            <p>
+                <img src="images/recastbots.png" />
+            </p>
+            -->
+            <subsection name="Introduction">
+                <p></p>
+            </subsection>
+            <subsection name="Configuration">
+                <p></p>
+            </subsection>
+            <subsection name="Usage">
+                <p></p>
+            </subsection>
+        </section>
+    </body>
+</document>
+
