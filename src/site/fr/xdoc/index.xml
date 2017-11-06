@@ -5,19 +5,33 @@
     </properties>
     <body>
         <section name="Plugin recastbots">
-            <!--
             <p>
                 <img src="images/recastbots.png" />
             </p>
-            -->
             <subsection name="Introduction">
-                <p></p>
+                <p>
+                    Ce plugin permet d'administrer le déploiement de chatbots réalisés avec la plate-forme <a href="http://recast.ai">Recast.ai</a> 
+                    sur l'interface de chat Web réalisée par le <a href="https://github.com/lutece-platform/lutece-chat-plugin-chatbot">plugin ChatBot</a>. 
+                </p>
             </subsection>
             <subsection name="Configuration">
-                <p></p>
+                <p>Aucune configuration particulière n'est requise</p>
             </subsection>
             <subsection name="Usage">
-                <p></p>
+                <p>
+                    Dans le back office, choisir la fonctionnalité "Gestion des chatbots Recast".
+                </p>
+                <p>
+                    Créer un nouveau Bot à l'aide du bouton "Ajouter un bot" et en valorisant les éléments suivants :
+                    <ul>
+                        <li>L'identifiant alphanumérique du bot (clé d'identification pour le plugin ChatBot)</li>
+                        <li>Le nom, la description et l'avatar du bot qui s'afficheront dans l'interface du plugin ChatBot</li>
+                        <li>La langue du bot (permettant sélectionner la langue sur la plate-forme Recast)</li>
+                        <li>Le Token d'autorisation (correspond au Request Access Token nécessaire pour accéder au bot sur la plate-forme Recast)</li>
+                        <li>Le statut : actif ou inactif</li>
+                    </ul>
+                       
+                </p>
             </subsection>
         </section>
     </body>
