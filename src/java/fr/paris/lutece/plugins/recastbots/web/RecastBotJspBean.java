@@ -36,6 +36,7 @@ package fr.paris.lutece.plugins.recastbots.web;
 
 import fr.paris.lutece.plugins.recastbots.business.RecastBot;
 import fr.paris.lutece.plugins.recastbots.business.RecastBotHome;
+import fr.paris.lutece.plugins.recastbots.service.BotRegistrationService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
@@ -68,6 +69,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
 
     // Markers
     private static final String MARK_RECASTBOT_LIST = "recastbot_list";
+    private static final String MARK_STATUS_LIST = "status_list";
     private static final String MARK_RECASTBOT = "recastbot";
 
     private static final String JSP_MANAGE_RECASTBOTS = "jsp/admin/plugins/recastbots/ManageRecastBots.jsp";
@@ -125,6 +127,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_RECASTBOT, _recastbot );
+        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale() ));
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_RECASTBOT, TEMPLATE_CREATE_RECASTBOT, model );
     }
@@ -205,6 +208,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_RECASTBOT, _recastbot );
+        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale() ));
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_RECASTBOT, TEMPLATE_MODIFY_RECASTBOT, model );
     }

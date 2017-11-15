@@ -24,7 +24,7 @@
 					<@input type='text' name='language' value='${recastbot.language}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{recastbots.modify_recastbot.labelBotStatus}' helpKey='#i18n{recastbots.modify_recastbot.labelBotStatus.help}' mandatory=true>
-					<@input type='text' name='bot_status' value='${recastbot.botStatus}' />
+					<@select name='bot_status' items=status_list default_value='${recastbot.botStatus}' />
 				</@formGroup>
 				<@formGroup labelKey='#i18n{recastbots.modify_recastbot.labelToken}' helpKey='#i18n{recastbots.modify_recastbot.labelToken.help}' mandatory=true>
 					<@input type='text' name='token' value='${recastbot.token}' />

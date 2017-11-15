@@ -43,7 +43,11 @@
                 ${recastbot.language}
             </td>
             <td>
-                ${recastbot.botStatus}
+            <#if recastbot.botStatus = 0>
+                <span class="label label-danger">#i18n{recastbots.bot_status.disabled}</span>
+            <#else>
+                <span class="label label-success">#i18n{recastbots.bot_status.enabled}</span>
+            </#if>
             </td>
             <td>
                 ${recastbot.token}

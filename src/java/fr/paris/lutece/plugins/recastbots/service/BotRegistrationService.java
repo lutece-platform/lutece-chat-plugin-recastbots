@@ -31,27 +31,55 @@
  *
  * License 1.0
  */
-
-
 package fr.paris.lutece.plugins.recastbots.service;
 
 import fr.paris.lutece.plugins.chatbot.service.BotService;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.recastbots.business.RecastBot;
 import fr.paris.lutece.plugins.recastbots.business.RecastBotHome;
+import fr.paris.lutece.portal.service.i18n.I18nService;
+import fr.paris.lutece.util.ReferenceList;
+import java.util.Locale;
 
 /**
  * BotRegistrationService
  */
-public class BotRegistrationService 
+public class BotRegistrationService
 {
 
-     public static void registerAllBots()
-     {
-         for( RecastBot bot : RecastBotHome.getRecastBotsList() )
-         {
-             ChatBot chatbot = new BotInstance( bot );
-             BotService.register( chatbot );
-         }
-     }
+    private static final String MESSAGE_STATUS_ENABLED = "recastbots.bot_status.enabled";
+    private static final String MESSAGE_STATUS_DISABLED = "recastbots.bot_status.disabled";
+    private static final int STATUS_ENABLED = 1;
+    private static final int STATUS_DISABLED = 0;
+
+    private static ReferenceList _listStatus;
+
+    /**
+     * Register all bots
+     */
+    public static void registerAllBots()
+    {
+        for( RecastBot bot : RecastBotHome.getRecastBotsList() )
+        {
+            ChatBot chatbot = new BotInstance( bot );
+            BotService.register( chatbot );
+        }
+    }
+
+    /**
+     * Returns the list of available bot status
+     *
+     * @param locale The locale
+     * @return The list
+     */
+    public static ReferenceList getBotsStatusList( Locale locale )
+    {
+        if( _listStatus == null )
+        {
+            _listStatus = new ReferenceList();
+            _listStatus.addItem( STATUS_DISABLED, I18nService.getLocalizedString( MESSAGE_STATUS_DISABLED, locale ) );
+            _listStatus.addItem( STATUS_ENABLED, I18nService.getLocalizedString( MESSAGE_STATUS_ENABLED, locale ) );
+        }
+        return _listStatus;
+    }
 }
