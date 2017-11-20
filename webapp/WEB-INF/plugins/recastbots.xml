@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plug-in>
+<?xml version="1.0" encoding="UTF-8"?><plug-in>
     <name>recastbots</name>
     <class>fr.paris.lutece.plugins.recastbots.service.ChatBotsPlugin</class>
     <version>1.0.0</version>
-    <documentation></documentation>
-    <installation></installation>
-    <changes></changes>
-    <user-guide></user-guide>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
     <description>recastbots.plugin.description</description>
     <provider>recastbots.plugin.provider</provider>
     <provider-url>http://lutece.paris.fr</provider-url>
@@ -27,7 +26,7 @@
             <feature-description>recastbots.adminFeature.ManageBots.description</feature-description>
             <feature-level>1</feature-level>
             <feature-url>jsp/admin/plugins/recastbots/ManageRecastBots.jsp</feature-url>
-            <feature-icon-url></feature-icon-url>
+            <feature-icon-url/>
       </admin-feature>
     </admin-features>    
 
