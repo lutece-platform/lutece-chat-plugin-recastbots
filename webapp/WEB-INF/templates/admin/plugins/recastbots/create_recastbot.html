@@ -1,36 +1,33 @@
 <#include "managebots_tabs.html" />
 <@tabs2 tab="recastbot" />
 <@box>
-	<@boxHeader title='#i18n{recastbots.create_recastbot.title}' />
-	<@boxBody>
-    <@tform name='create_recastbot' action='jsp/admin/plugins/recastbots/ManageRecastBots.jsp'>
-
-        <@messages errors=errors />
-        <input type="hidden" id="id" name="id"/>
-        
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelBotKey}' helpKey='#i18n{recastbots.create_recastbot.labelBotKey.help}' mandatory=true>
-					<@input type='text' name='bot_key' value='${recastbot.botKey!\'\'}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelName}' helpKey='#i18n{recastbots.create_recastbot.labelName.help}' mandatory=true>
-					<@input type='text' name='name' value='${recastbot.name!\'\'}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelDescription}' helpKey='#i18n{recastbots.create_recastbot.labelDescription.help}' mandatory=true>
-					<@input type='text' name='description' value='${recastbot.description!\'\'}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelAvatarUrl}' helpKey='#i18n{recastbots.create_recastbot.labelAvatarUrl.help}' >
-					<@input type='text' name='avatar_url' value='${recastbot.avatarUrl!\'\'}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelLanguage}' helpKey='#i18n{recastbots.create_recastbot.labelLanguage.help}' mandatory=true>
-					<@input type='text' name='language' value='${recastbot.language!\'\'}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelBotStatus}' helpKey='#i18n{recastbots.create_recastbot.labelBotStatus.help}' mandatory=true>
-					<@select name='bot_status' items=status_list default_value='${recastbot.botStatus}' />
-				</@formGroup>
-				<@formGroup labelKey='#i18n{recastbots.create_recastbot.labelToken}' helpKey='#i18n{recastbots.create_recastbot.labelToken.help}' mandatory=true>
-					<@input type='text' name='token' value='${recastbot.token!\'\'}' />
-				</@formGroup>
-				
-				<@actionButtons button1Name="action_createRecastBot" button2Name="view_manageRecastBot"/>
-    </@tform>
-	</@boxBody>
+    <@boxHeader title='#i18n{recastbots.create_recastbot.title}' />
+    <@boxBody>
+        <@tform name='create_recastbot' action='jsp/admin/plugins/recastbots/ManageRecastBots.jsp'>
+            <@messages errors=errors />
+            <input type="hidden" id="id" name="id"/>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelBotKey}' helpKey='#i18n{recastbots.create_recastbot.labelBotKey.help}' mandatory=true>
+                        <@input type='text' name='bot_key' value='${recastbot.botKey!\'\'}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelName}' helpKey='#i18n{recastbots.create_recastbot.labelName.help}' mandatory=true>
+                        <@input type='text' name='name' value='${recastbot.name!\'\'}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelDescription}' helpKey='#i18n{recastbots.create_recastbot.labelDescription.help}' mandatory=true>
+                        <@input type='text' name='description' value='${recastbot.description!\'\'}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelAvatarUrl}' helpKey='#i18n{recastbots.create_recastbot.labelAvatarUrl.help}' >
+                        <@input type='text' name='avatar_url' value='${recastbot.avatarUrl!\'\'}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelLanguage}' helpKey='#i18n{recastbots.create_recastbot.labelLanguage.help}' mandatory=true>
+                        <@select name='language' items=languages_list default_value='${recastbot.language!\'\'}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelBotStatus}' helpKey='#i18n{recastbots.create_recastbot.labelBotStatus.help}' mandatory=true>
+                        <@select name='bot_status' items=status_list default_value='${recastbot.botStatus}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelToken}' helpKey='#i18n{recastbots.create_recastbot.labelToken.help}' mandatory=true>
+                        <@input type='text' name='token' value='${recastbot.token!\'\'}' />
+                </@formGroup>
+                <@actionButtons button1Name="action_createRecastBot" button2Name="view_manageRecastBot"/>
+        </@tform>
+    </@boxBody>
 </@box>

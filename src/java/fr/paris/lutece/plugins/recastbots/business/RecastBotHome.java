@@ -33,8 +33,8 @@
  */
  package fr.paris.lutece.plugins.recastbots.business;
 
-import fr.paris.lutece.plugins.chatbot.service.BotService;
 import fr.paris.lutece.plugins.recastbots.service.BotInstance;
+import fr.paris.lutece.plugins.recastbots.service.BotRegistrationService;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -67,7 +67,7 @@ public final class RecastBotHome
     {
         _dao.insert( recastBot, _plugin );
         
-        BotService.register( new BotInstance( recastBot ));
+        BotRegistrationService.register( new BotInstance( recastBot )  , recastBot.getBotStatus() );
 
         return recastBot;
     }
@@ -80,8 +80,8 @@ public final class RecastBotHome
     public static RecastBot update( RecastBot recastBot )
     {
         _dao.store( recastBot, _plugin );
-        BotService.unregister( recastBot.getBotKey() );
-        BotService.register( new BotInstance( recastBot ));
+        BotRegistrationService.unregister( recastBot.getBotKey() );
+        BotRegistrationService.register( new BotInstance( recastBot ) , recastBot.getBotStatus() );
 
         return recastBot;
     }
@@ -93,7 +93,7 @@ public final class RecastBotHome
     public static void remove( int nKey )
     {
         RecastBot bot = findByPrimaryKey( nKey );
-        BotService.unregister( bot.getBotKey() );
+        BotRegistrationService.unregister( bot.getBotKey() );
 
         _dao.delete( nKey, _plugin );
     }

@@ -82,4 +82,26 @@ public class BotRegistrationService
         }
         return _listStatus;
     }
+
+    /**
+     * Register the bot
+     * @param botInstance The bot instance
+     * @param nStatus The status
+     */
+    public static void register( BotInstance botInstance , int nStatus )
+    {
+        if( nStatus == STATUS_ENABLED )
+        {
+            BotService.register( botInstance );
+        }
+    }
+
+    /**
+     * Un register the bot
+     * @param strBotKey The bot key
+     */
+    public static void unregister( String strBotKey )
+    {
+        BotService.unregister( strBotKey );
+    }
 }
