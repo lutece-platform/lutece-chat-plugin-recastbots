@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-recastbots</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>Lutece recastbots plugin</name>
 
@@ -71,7 +71,7 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-recastbots.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-recastbots.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-chat-plugin-recastbots.git</url>
-      <tag>plugin-recastbots-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
