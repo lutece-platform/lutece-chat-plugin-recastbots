@@ -1,9 +1,13 @@
 package fr.paris.lutece.plugins.recastbots.service;
 
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
+import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.recast.business.DialogResponse;
 import fr.paris.lutece.plugins.recast.business.Message;
 import fr.paris.lutece.plugins.recast.service.RecastDialogService;
+import fr.paris.lutece.plugins.recast.service.card.CardRenderer;
+import fr.paris.lutece.plugins.recast.service.card.DefaultCardRenderer;
 import fr.paris.lutece.plugins.recastbots.business.RecastBot;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.util.httpaccess.HttpAccessException;
@@ -60,6 +64,8 @@ public class BotInstance implements ChatBot
     private String _strAvatarUrl;
     private String _strToken;
     private String _strLanguage;
+    private boolean _bStandalone;
+    private CardRenderer _renderer;
     
     /**
      * Constructor
@@ -73,6 +79,7 @@ public class BotInstance implements ChatBot
         _strLanguage = bot.getLanguage();
         _strAvatarUrl = bot.getAvatarUrl();
         _strToken = bot.getToken();
+        _renderer = new DefaultCardRenderer();
                 
     }
 
@@ -131,9 +138,9 @@ public class BotInstance implements ChatBot
      * {@inheritDoc }
      */
     @Override
-    public List<String> processUserMessage( String strMessage, String strConversationId, Locale locale )
+    public List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        List<String> listMessages = new ArrayList<>();
+        List<BotPost> listMessages = new ArrayList<>();
         DialogResponse response = null;
         
         try
@@ -149,11 +156,36 @@ public class BotInstance implements ChatBot
         {
             for( Message message : response.getMessages() )
             {
-                listMessages.add( message.getContent() );
+                String strContent = message.getContent( _renderer );
+                String strContentType = Post.CONTENT_TYPE_TEXT;
+                if( message.getType().equals( Message.TYPE_CARD ) )
+                {
+                    strContentType = Post.CONTENT_TYPE_CARD;
+                }    
+                BotPost post = new BotPost( strContent , strContentType );
+                listMessages.add( post );
             }
         }
         return listMessages;
     }
 
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public boolean isStandalone()
+    {
+        return _bStandalone;
+    }
+
+    /**
+     * Sets the Standalone
+     *
+     * @param bStandalone The Standalone
+     */
+    public void setStandalone( boolean bStandalone )
+    {
+        _bStandalone = bStandalone;
+    }
     
 }
