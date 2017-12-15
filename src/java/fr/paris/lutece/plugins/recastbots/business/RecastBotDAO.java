@@ -65,16 +65,16 @@ public final class RecastBotDAO implements IRecastBotDAO
         try
         {
             int nIndex = 1;
-            daoUtil.setString( nIndex++ , recastBot.getBotKey( ) );
-            daoUtil.setString( nIndex++ , recastBot.getName( ) );
-            daoUtil.setString( nIndex++ , recastBot.getDescription( ) );
-            daoUtil.setString( nIndex++ , recastBot.getAvatarUrl( ) );
-            daoUtil.setString( nIndex++ , recastBot.getLanguage( ) );
-            daoUtil.setInt( nIndex++ , recastBot.getBotStatus( ) );
-            daoUtil.setString( nIndex++ , recastBot.getToken( ) );
-            
+            daoUtil.setString( nIndex++, recastBot.getBotKey( ) );
+            daoUtil.setString( nIndex++, recastBot.getName( ) );
+            daoUtil.setString( nIndex++, recastBot.getDescription( ) );
+            daoUtil.setString( nIndex++, recastBot.getAvatarUrl( ) );
+            daoUtil.setString( nIndex++, recastBot.getLanguage( ) );
+            daoUtil.setInt( nIndex++, recastBot.getBotStatus( ) );
+            daoUtil.setString( nIndex++, recastBot.getToken( ) );
+
             daoUtil.executeUpdate( );
-            if ( daoUtil.nextGeneratedKey( ) ) 
+            if ( daoUtil.nextGeneratedKey( ) )
             {
                 recastBot.setId( daoUtil.getGeneratedKeyInt( 1 ) );
             }
@@ -92,15 +92,15 @@ public final class RecastBotDAO implements IRecastBotDAO
     public RecastBot load( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeQuery( );
         RecastBot recastBot = null;
 
         if ( daoUtil.next( ) )
         {
-            recastBot = new RecastBot();
+            recastBot = new RecastBot( );
             int nIndex = 1;
-            
+
             recastBot.setId( daoUtil.getInt( nIndex++ ) );
             recastBot.setBotKey( daoUtil.getString( nIndex++ ) );
             recastBot.setName( daoUtil.getString( nIndex++ ) );
@@ -122,7 +122,7 @@ public final class RecastBotDAO implements IRecastBotDAO
     public void delete( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -135,16 +135,16 @@ public final class RecastBotDAO implements IRecastBotDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
         int nIndex = 1;
-        
-        daoUtil.setInt( nIndex++ , recastBot.getId( ) );
-        daoUtil.setString( nIndex++ , recastBot.getBotKey( ) );
-        daoUtil.setString( nIndex++ , recastBot.getName( ) );
-        daoUtil.setString( nIndex++ , recastBot.getDescription( ) );
-        daoUtil.setString( nIndex++ , recastBot.getAvatarUrl( ) );
-        daoUtil.setString( nIndex++ , recastBot.getLanguage( ) );
-        daoUtil.setInt( nIndex++ , recastBot.getBotStatus( ) );
-        daoUtil.setString( nIndex++ , recastBot.getToken( ) );
-        daoUtil.setInt( nIndex , recastBot.getId( ) );
+
+        daoUtil.setInt( nIndex++, recastBot.getId( ) );
+        daoUtil.setString( nIndex++, recastBot.getBotKey( ) );
+        daoUtil.setString( nIndex++, recastBot.getName( ) );
+        daoUtil.setString( nIndex++, recastBot.getDescription( ) );
+        daoUtil.setString( nIndex++, recastBot.getAvatarUrl( ) );
+        daoUtil.setString( nIndex++, recastBot.getLanguage( ) );
+        daoUtil.setInt( nIndex++, recastBot.getBotStatus( ) );
+        daoUtil.setString( nIndex++, recastBot.getToken( ) );
+        daoUtil.setInt( nIndex, recastBot.getId( ) );
 
         daoUtil.executeUpdate( );
         daoUtil.free( );
@@ -156,15 +156,15 @@ public final class RecastBotDAO implements IRecastBotDAO
     @Override
     public List<RecastBot> selectRecastBotsList( Plugin plugin )
     {
-        List<RecastBot> recastBotList = new ArrayList<RecastBot>(  );
+        List<RecastBot> recastBotList = new ArrayList<RecastBot>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            RecastBot recastBot = new RecastBot(  );
+            RecastBot recastBot = new RecastBot( );
             int nIndex = 1;
-            
+
             recastBot.setId( daoUtil.getInt( nIndex++ ) );
             recastBot.setBotKey( daoUtil.getString( nIndex++ ) );
             recastBot.setName( daoUtil.getString( nIndex++ ) );
@@ -180,7 +180,7 @@ public final class RecastBotDAO implements IRecastBotDAO
         daoUtil.free( );
         return recastBotList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
@@ -189,9 +189,9 @@ public final class RecastBotDAO implements IRecastBotDAO
     {
         List<Integer> recastBotList = new ArrayList<Integer>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
             recastBotList.add( daoUtil.getInt( 1 ) );
         }
@@ -199,20 +199,20 @@ public final class RecastBotDAO implements IRecastBotDAO
         daoUtil.free( );
         return recastBotList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public ReferenceList selectRecastBotsReferenceList( Plugin plugin )
     {
-        ReferenceList recastBotList = new ReferenceList();
+        ReferenceList recastBotList = new ReferenceList( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            recastBotList.addItem( daoUtil.getInt( 1 ) , daoUtil.getString( 2 ) );
+            recastBotList.addItem( daoUtil.getInt( 1 ), daoUtil.getString( 2 ) );
         }
 
         daoUtil.free( );

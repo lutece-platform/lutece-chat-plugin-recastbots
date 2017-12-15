@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- package fr.paris.lutece.plugins.recastbots.business;
+package fr.paris.lutece.plugins.recastbots.business;
 
 import fr.paris.lutece.plugins.recastbots.service.BotInstance;
 import fr.paris.lutece.plugins.recastbots.service.BotRegistrationService;
@@ -54,85 +54,95 @@ public final class RecastBotHome
     /**
      * Private constructor - this class need not be instantiated
      */
-    private RecastBotHome(  )
+    private RecastBotHome( )
     {
     }
 
     /**
      * Create an instance of the recastBot class
-     * @param recastBot The instance of the RecastBot which contains the informations to store
-     * @return The  instance of recastBot which has been created with its primary key.
+     * 
+     * @param recastBot
+     *            The instance of the RecastBot which contains the informations to store
+     * @return The instance of recastBot which has been created with its primary key.
      */
     public static RecastBot create( RecastBot recastBot )
     {
         _dao.insert( recastBot, _plugin );
-        
-        BotRegistrationService.register( new BotInstance( recastBot )  , recastBot.getBotStatus() );
+
+        BotRegistrationService.register( new BotInstance( recastBot ), recastBot.getBotStatus( ) );
 
         return recastBot;
     }
 
     /**
      * Update of the recastBot which is specified in parameter
-     * @param recastBot The instance of the RecastBot which contains the data to store
-     * @return The instance of the  recastBot which has been updated
+     * 
+     * @param recastBot
+     *            The instance of the RecastBot which contains the data to store
+     * @return The instance of the recastBot which has been updated
      */
     public static RecastBot update( RecastBot recastBot )
     {
         _dao.store( recastBot, _plugin );
-        BotRegistrationService.unregister( recastBot.getBotKey() );
-        BotRegistrationService.register( new BotInstance( recastBot ) , recastBot.getBotStatus() );
+        BotRegistrationService.unregister( recastBot.getBotKey( ) );
+        BotRegistrationService.register( new BotInstance( recastBot ), recastBot.getBotStatus( ) );
 
         return recastBot;
     }
 
     /**
      * Remove the recastBot whose identifier is specified in parameter
-     * @param nKey The recastBot Id
+     * 
+     * @param nKey
+     *            The recastBot Id
      */
     public static void remove( int nKey )
     {
         RecastBot bot = findByPrimaryKey( nKey );
-        BotRegistrationService.unregister( bot.getBotKey() );
+        BotRegistrationService.unregister( bot.getBotKey( ) );
 
         _dao.delete( nKey, _plugin );
     }
 
     /**
      * Returns an instance of a recastBot whose identifier is specified in parameter
-     * @param nKey The recastBot primary key
+     * 
+     * @param nKey
+     *            The recastBot primary key
      * @return an instance of RecastBot
      */
     public static RecastBot findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin);
+        return _dao.load( nKey, _plugin );
     }
 
     /**
      * Load the data of all the recastBot objects and returns them as a list
+     * 
      * @return the list which contains the data of all the recastBot objects
      */
     public static List<RecastBot> getRecastBotsList( )
     {
         return _dao.selectRecastBotsList( _plugin );
     }
-    
+
     /**
      * Load the id of all the recastBot objects and returns them as a list
+     * 
      * @return the list which contains the id of all the recastBot objects
      */
     public static List<Integer> getIdRecastBotsList( )
     {
         return _dao.selectIdRecastBotsList( _plugin );
     }
-    
+
     /**
      * Load the data of all the recastBot objects and returns them as a referenceList
+     * 
      * @return the referenceList which contains the data of all the recastBot objects
      */
     public static ReferenceList getRecastBotsReferenceList( )
     {
-        return _dao.selectRecastBotsReferenceList(_plugin );
+        return _dao.selectRecastBotsReferenceList( _plugin );
     }
 }
-

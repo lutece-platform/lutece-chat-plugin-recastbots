@@ -57,9 +57,9 @@ public class BotRegistrationService
     /**
      * Register all bots
      */
-    public static void registerAllBots()
+    public static void registerAllBots( )
     {
-        for( RecastBot bot : RecastBotHome.getRecastBotsList() )
+        for ( RecastBot bot : RecastBotHome.getRecastBotsList( ) )
         {
             ChatBot chatbot = new BotInstance( bot );
             BotService.register( chatbot );
@@ -69,14 +69,15 @@ public class BotRegistrationService
     /**
      * Returns the list of available bot status
      *
-     * @param locale The locale
+     * @param locale
+     *            The locale
      * @return The list
      */
     public static ReferenceList getBotsStatusList( Locale locale )
     {
-        if( _listStatus == null )
+        if ( _listStatus == null )
         {
-            _listStatus = new ReferenceList();
+            _listStatus = new ReferenceList( );
             _listStatus.addItem( STATUS_DISABLED, I18nService.getLocalizedString( MESSAGE_STATUS_DISABLED, locale ) );
             _listStatus.addItem( STATUS_ENABLED, I18nService.getLocalizedString( MESSAGE_STATUS_ENABLED, locale ) );
         }
@@ -85,12 +86,15 @@ public class BotRegistrationService
 
     /**
      * Register the bot
-     * @param botInstance The bot instance
-     * @param nStatus The status
+     * 
+     * @param botInstance
+     *            The bot instance
+     * @param nStatus
+     *            The status
      */
-    public static void register( BotInstance botInstance , int nStatus )
+    public static void register( BotInstance botInstance, int nStatus )
     {
-        if( nStatus == STATUS_ENABLED )
+        if ( nStatus == STATUS_ENABLED )
         {
             BotService.register( botInstance );
         }
@@ -98,7 +102,9 @@ public class BotRegistrationService
 
     /**
      * Un register the bot
-     * @param strBotKey The bot key
+     * 
+     * @param strBotKey
+     *            The bot key
      */
     public static void unregister( String strBotKey )
     {

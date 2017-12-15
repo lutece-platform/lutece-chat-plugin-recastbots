@@ -1,21 +1,3 @@
-package fr.paris.lutece.plugins.recastbots.service;
-
-import fr.paris.lutece.plugins.chatbot.business.BotPost;
-import fr.paris.lutece.plugins.chatbot.business.Post;
-import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
-import fr.paris.lutece.plugins.recast.business.DialogResponse;
-import fr.paris.lutece.plugins.recast.business.Message;
-import fr.paris.lutece.plugins.recast.service.RecastDialogService;
-import fr.paris.lutece.plugins.recast.service.card.CardRenderer;
-import fr.paris.lutece.plugins.recast.service.card.DefaultCardRenderer;
-import fr.paris.lutece.plugins.recastbots.business.RecastBot;
-import fr.paris.lutece.portal.service.util.AppLogService;
-import fr.paris.lutece.util.httpaccess.HttpAccessException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 /*
  * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
@@ -50,14 +32,34 @@ import java.util.Locale;
  * License 1.0
  */
 
+package fr.paris.lutece.plugins.recastbots.service;
+
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
+import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
+import fr.paris.lutece.plugins.recast.business.DialogResponse;
+import fr.paris.lutece.plugins.recast.business.Message;
+import fr.paris.lutece.plugins.recast.service.BotMessageRenderer;
+import fr.paris.lutece.plugins.recast.service.RecastDialogService;
+import fr.paris.lutece.plugins.recast.service.renderers.DefaultCardRenderer;
+import fr.paris.lutece.plugins.recast.service.renderers.DefaultPictureRenderer;
+import fr.paris.lutece.plugins.recast.service.renderers.DefaultTextRenderer;
+import fr.paris.lutece.plugins.recastbots.business.RecastBot;
+import fr.paris.lutece.portal.service.util.AppLogService;
+import fr.paris.lutece.util.httpaccess.HttpAccessException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * BotInstance
  */
 public class BotInstance implements ChatBot
 {
-    private static final String DEFAULT_AVATAR = "images/skin/plugins/recastbots/default_avatar.png"; 
-            
+    private static final String DEFAULT_AVATAR = "images/skin/plugins/recastbots/default_avatar.png";
+
     private String _strKey;
     private String _strName;
     private String _strDescription;
@@ -65,29 +67,35 @@ public class BotInstance implements ChatBot
     private String _strToken;
     private String _strLanguage;
     private boolean _bStandalone;
-    private CardRenderer _renderer;
-    
+    private Map<String, BotMessageRenderer> _mapRenderers;
+
     /**
      * Constructor
-     * @param bot The Recast bot data
+     * 
+     * @param bot
+     *            The Recast bot data
      */
     public BotInstance( RecastBot bot )
     {
-        _strKey = bot.getBotKey();
-        _strName = bot.getName();
-        _strDescription = bot.getDescription();
-        _strLanguage = bot.getLanguage();
-        _strAvatarUrl = bot.getAvatarUrl();
-        _strToken = bot.getToken();
-        _renderer = new DefaultCardRenderer();
-                
+        _strKey = bot.getBotKey( );
+        _strName = bot.getName( );
+        _strDescription = bot.getDescription( );
+        _strLanguage = bot.getLanguage( );
+        _strAvatarUrl = bot.getAvatarUrl( );
+        _strToken = bot.getToken( );
+        _mapRenderers = new HashMap<>( );
+
+        _mapRenderers.put( DefaultTextRenderer.CONTENT_TYPE, new DefaultTextRenderer( ) );
+        _mapRenderers.put( DefaultPictureRenderer.CONTENT_TYPE, new DefaultPictureRenderer( ) );
+        _mapRenderers.put( DefaultCardRenderer.CONTENT_TYPE, new DefaultCardRenderer( ) );
+
     }
 
     /**
      * {@inheritDoc }
      */
     @Override
-    public String getKey()
+    public String getKey( )
     {
         return _strKey;
     }
@@ -114,9 +122,9 @@ public class BotInstance implements ChatBot
      * {@inheritDoc }
      */
     @Override
-    public List<String> getAvailableLanguages()
+    public List<String> getAvailableLanguages( )
     {
-        List<String> listLanguages = new ArrayList<>();
+        List<String> listLanguages = new ArrayList<>( );
         listLanguages.add( _strLanguage );
         return listLanguages;
     }
@@ -125,44 +133,40 @@ public class BotInstance implements ChatBot
      * {@inheritDoc }
      */
     @Override
-    public String getAvatarUrl()
+    public String getAvatarUrl( )
     {
-        if( (_strAvatarUrl == null ) || ( _strAvatarUrl.equals( "" ) ))
+        if ( ( _strAvatarUrl == null ) || ( _strAvatarUrl.equals( "" ) ) )
         {
             return DEFAULT_AVATAR;
-        }        
+        }
         return _strAvatarUrl;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        List<BotPost> listMessages = new ArrayList<>();
+        List<BotPost> listMessages = new ArrayList<>( );
         DialogResponse response = null;
-        
+
         try
         {
             response = RecastDialogService.getDialogResponse( strMessage, strConversationId, _strToken, _strLanguage );
         }
         catch( IOException | HttpAccessException ex )
         {
-            AppLogService.error( "Error accessing recast API : " + ex.getMessage(), ex );
+            AppLogService.error( "Error accessing recast API : " + ex.getMessage( ), ex );
         }
 
-        if( response != null )
+        if ( response != null )
         {
-            for( Message message : response.getMessages() )
+            for ( Message message : response.getMessages( ) )
             {
-                String strContent = message.getContent( _renderer );
-                String strContentType = Post.CONTENT_TYPE_TEXT;
-                if( message.getType().equals( Message.TYPE_CARD ) )
-                {
-                    strContentType = Post.CONTENT_TYPE_CARD;
-                }    
-                BotPost post = new BotPost( strContent , strContentType );
+                String strContent = message.getContent( _mapRenderers );
+                String strContentType = message.getType( );
+                BotPost post = new BotPost( strContent, strContentType );
                 listMessages.add( post );
             }
         }
@@ -173,7 +177,7 @@ public class BotInstance implements ChatBot
      * {@inheritDoc }
      */
     @Override
-    public boolean isStandalone()
+    public boolean isStandalone( )
     {
         return _bStandalone;
     }
@@ -181,11 +185,12 @@ public class BotInstance implements ChatBot
     /**
      * Sets the Standalone
      *
-     * @param bStandalone The Standalone
+     * @param bStandalone
+     *            The Standalone
      */
     public void setStandalone( boolean bStandalone )
     {
         _bStandalone = bStandalone;
     }
-    
+
 }

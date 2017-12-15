@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- 	
+
 package fr.paris.lutece.plugins.recastbots.web;
 
 import fr.paris.lutece.plugins.recastbots.business.RecastBot;
@@ -97,20 +97,22 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     private static final String INFO_RECASTBOT_CREATED = "recastbots.info.recastbot.created";
     private static final String INFO_RECASTBOT_UPDATED = "recastbots.info.recastbot.updated";
     private static final String INFO_RECASTBOT_REMOVED = "recastbots.info.recastbot.removed";
-    
+
     // Session variable to store working values
     private RecastBot _recastbot;
-    
+
     /**
      * Build the Manage View
-     * @param request The HTTP request
+     * 
+     * @param request
+     *            The HTTP request
      * @return The page
      */
     @View( value = VIEW_MANAGE_RECASTBOTS, defaultView = true )
     public String getManageRecastBots( HttpServletRequest request )
     {
         _recastbot = null;
-        List<RecastBot> listRecastBots = RecastBotHome.getRecastBotsList(  );
+        List<RecastBot> listRecastBots = RecastBotHome.getRecastBotsList( );
         Map<String, Object> model = getPaginatedListModel( request, MARK_RECASTBOT_LIST, listRecastBots, JSP_MANAGE_RECASTBOTS );
 
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_RECASTBOTS, TEMPLATE_MANAGE_RECASTBOTS, model );
@@ -119,18 +121,19 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     /**
      * Returns the form to create a recastbot
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the html code of the recastbot form
      */
     @View( VIEW_CREATE_RECASTBOT )
     public String getCreateRecastBot( HttpServletRequest request )
     {
-        _recastbot = ( _recastbot != null ) ? _recastbot : new RecastBot(  );
+        _recastbot = ( _recastbot != null ) ? _recastbot : new RecastBot( );
 
-        Map<String, Object> model = getModel(  );
+        Map<String, Object> model = getModel( );
         model.put( MARK_RECASTBOT, _recastbot );
-        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale() ));
-        model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale() ));
+        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale( ) ) );
+        model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale( ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_RECASTBOT, TEMPLATE_CREATE_RECASTBOT, model );
     }
@@ -138,7 +141,8 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     /**
      * Process the data capture form of a new recastbot
      *
-     * @param request The Http Request
+     * @param request
+     *            The Http Request
      * @return The Jsp URL of the process result
      */
     @Action( ACTION_CREATE_RECASTBOT )
@@ -153,16 +157,16 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
         }
 
         RecastBotHome.create( _recastbot );
-        addInfo( INFO_RECASTBOT_CREATED, getLocale(  ) );
+        addInfo( INFO_RECASTBOT_CREATED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_RECASTBOTS );
     }
 
     /**
-     * Manages the removal form of a recastbot whose identifier is in the http
-     * request
+     * Manages the removal form of a recastbot whose identifier is in the http request
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the html code to confirm
      */
     @Action( ACTION_CONFIRM_REMOVE_RECASTBOT )
@@ -172,7 +176,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
         UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_RECASTBOT ) );
         url.addParameter( PARAMETER_ID_RECASTBOT, nId );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_RECASTBOT, url.getUrl(  ), AdminMessage.TYPE_CONFIRMATION );
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_RECASTBOT, url.getUrl( ), AdminMessage.TYPE_CONFIRMATION );
 
         return redirect( request, strMessageUrl );
     }
@@ -180,7 +184,8 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     /**
      * Handles the removal form of a recastbot
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the jsp URL to display the form to manage recastbots
      */
     @Action( ACTION_REMOVE_RECASTBOT )
@@ -188,7 +193,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_RECASTBOT ) );
         RecastBotHome.remove( nId );
-        addInfo( INFO_RECASTBOT_REMOVED, getLocale(  ) );
+        addInfo( INFO_RECASTBOT_REMOVED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_RECASTBOTS );
     }
@@ -196,7 +201,8 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     /**
      * Returns the form to update info about a recastbot
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML form to update info
      */
     @View( VIEW_MODIFY_RECASTBOT )
@@ -204,15 +210,15 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_RECASTBOT ) );
 
-        if ( _recastbot == null || ( _recastbot.getId(  ) != nId ))
+        if ( _recastbot == null || ( _recastbot.getId( ) != nId ) )
         {
             _recastbot = RecastBotHome.findByPrimaryKey( nId );
         }
 
-        Map<String, Object> model = getModel(  );
+        Map<String, Object> model = getModel( );
         model.put( MARK_RECASTBOT, _recastbot );
-        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale() ));
-        model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale() ));
+        model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale( ) ) );
+        model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale( ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_RECASTBOT, TEMPLATE_MODIFY_RECASTBOT, model );
     }
@@ -220,7 +226,8 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     /**
      * Process the change form of a recastbot
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The Jsp URL of the process result
      */
     @Action( ACTION_MODIFY_RECASTBOT )
@@ -235,7 +242,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
         }
 
         RecastBotHome.update( _recastbot );
-        addInfo( INFO_RECASTBOT_UPDATED, getLocale(  ) );
+        addInfo( INFO_RECASTBOT_UPDATED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_RECASTBOTS );
     }

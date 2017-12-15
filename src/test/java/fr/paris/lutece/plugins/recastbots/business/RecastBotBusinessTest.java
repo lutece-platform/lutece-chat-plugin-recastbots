@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.recastbots.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
 
-
 public class RecastBotBusinessTest extends LuteceTestCase
 {
     private final static String BOTKEY1 = "BotKey1";
@@ -54,10 +53,10 @@ public class RecastBotBusinessTest extends LuteceTestCase
     private final static String TOKEN1 = "Token1";
     private final static String TOKEN2 = "Token2";
 
-    public void testBusiness(  )
+    public void testBusiness( )
     {
         // Initialize an object
-        RecastBot recastBot = new RecastBot();
+        RecastBot recastBot = new RecastBot( );
         recastBot.setBotKey( BOTKEY1 );
         recastBot.setName( NAME1 );
         recastBot.setDescription( DESCRIPTION1 );
@@ -69,13 +68,13 @@ public class RecastBotBusinessTest extends LuteceTestCase
         // Create test
         RecastBotHome.create( recastBot );
         RecastBot recastBotStored = RecastBotHome.findByPrimaryKey( recastBot.getId( ) );
-        assertEquals( recastBotStored.getBotKey() , recastBot.getBotKey( ) );
-        assertEquals( recastBotStored.getName() , recastBot.getName( ) );
-        assertEquals( recastBotStored.getDescription() , recastBot.getDescription( ) );
-        assertEquals( recastBotStored.getAvatarUrl() , recastBot.getAvatarUrl( ) );
-        assertEquals( recastBotStored.getLanguage() , recastBot.getLanguage( ) );
-        assertEquals( recastBotStored.getBotStatus() , recastBot.getBotStatus( ) );
-        assertEquals( recastBotStored.getToken() , recastBot.getToken( ) );
+        assertEquals( recastBotStored.getBotKey( ), recastBot.getBotKey( ) );
+        assertEquals( recastBotStored.getName( ), recastBot.getName( ) );
+        assertEquals( recastBotStored.getDescription( ), recastBot.getDescription( ) );
+        assertEquals( recastBotStored.getAvatarUrl( ), recastBot.getAvatarUrl( ) );
+        assertEquals( recastBotStored.getLanguage( ), recastBot.getLanguage( ) );
+        assertEquals( recastBotStored.getBotStatus( ), recastBot.getBotStatus( ) );
+        assertEquals( recastBotStored.getToken( ), recastBot.getToken( ) );
 
         // Update test
         recastBot.setBotKey( BOTKEY2 );
@@ -87,22 +86,22 @@ public class RecastBotBusinessTest extends LuteceTestCase
         recastBot.setToken( TOKEN2 );
         RecastBotHome.update( recastBot );
         recastBotStored = RecastBotHome.findByPrimaryKey( recastBot.getId( ) );
-        assertEquals( recastBotStored.getBotKey() , recastBot.getBotKey( ) );
-        assertEquals( recastBotStored.getName() , recastBot.getName( ) );
-        assertEquals( recastBotStored.getDescription() , recastBot.getDescription( ) );
-        assertEquals( recastBotStored.getAvatarUrl() , recastBot.getAvatarUrl( ) );
-        assertEquals( recastBotStored.getLanguage() , recastBot.getLanguage( ) );
-        assertEquals( recastBotStored.getBotStatus() , recastBot.getBotStatus( ) );
-        assertEquals( recastBotStored.getToken() , recastBot.getToken( ) );
+        assertEquals( recastBotStored.getBotKey( ), recastBot.getBotKey( ) );
+        assertEquals( recastBotStored.getName( ), recastBot.getName( ) );
+        assertEquals( recastBotStored.getDescription( ), recastBot.getDescription( ) );
+        assertEquals( recastBotStored.getAvatarUrl( ), recastBot.getAvatarUrl( ) );
+        assertEquals( recastBotStored.getLanguage( ), recastBot.getLanguage( ) );
+        assertEquals( recastBotStored.getBotStatus( ), recastBot.getBotStatus( ) );
+        assertEquals( recastBotStored.getToken( ), recastBot.getToken( ) );
 
         // List test
-        RecastBotHome.getRecastBotsList();
+        RecastBotHome.getRecastBotsList( );
 
         // Delete test
         RecastBotHome.remove( recastBot.getId( ) );
         recastBotStored = RecastBotHome.findByPrimaryKey( recastBot.getId( ) );
         assertNull( recastBotStored );
-        
+
     }
 
 }

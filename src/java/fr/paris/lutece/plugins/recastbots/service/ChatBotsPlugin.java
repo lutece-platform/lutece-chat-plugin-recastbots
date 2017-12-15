@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.recastbots.service;
 
 import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
@@ -44,10 +43,10 @@ public class ChatBotsPlugin extends PluginDefaultImplementation
 {
 
     @Override
-    public void init()
+    public void init( )
     {
-        super.init(); 
-        BotRegistrationService.registerAllBots();
+        super.init( );
+        BotRegistrationService.registerAllBots( );
     }
 
 }

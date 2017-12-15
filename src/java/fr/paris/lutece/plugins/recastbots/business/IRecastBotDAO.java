@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.recastbots.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -45,53 +45,71 @@ public interface IRecastBotDAO
 {
     /**
      * Insert a new record in the table.
-     * @param recastBot instance of the RecastBot object to insert
-     * @param plugin the Plugin
+     * 
+     * @param recastBot
+     *            instance of the RecastBot object to insert
+     * @param plugin
+     *            the Plugin
      */
     void insert( RecastBot recastBot, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param recastBot the reference of the RecastBot
-     * @param plugin the Plugin
+     * 
+     * @param recastBot
+     *            the reference of the RecastBot
+     * @param plugin
+     *            the Plugin
      */
     void store( RecastBot recastBot, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the RecastBot to delete
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the RecastBot to delete
+     * @param plugin
+     *            the Plugin
      */
     void delete( int nKey, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the recastBot
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the recastBot
+     * @param plugin
+     *            the Plugin
      * @return The instance of the recastBot
      */
     RecastBot load( int nKey, Plugin plugin );
 
     /**
      * Load the data of all the recastBot objects and returns them as a list
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The list which contains the data of all the recastBot objects
      */
     List<RecastBot> selectRecastBotsList( Plugin plugin );
-    
+
     /**
      * Load the id of all the recastBot objects and returns them as a list
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The list which contains the id of all the recastBot objects
      */
     List<Integer> selectIdRecastBotsList( Plugin plugin );
-    
+
     /**
      * Load the data of all the recastBot objects and returns them as a referenceList
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The referenceList which contains the data of all the recastBot objects
      */
     ReferenceList selectRecastBotsReferenceList( Plugin plugin );

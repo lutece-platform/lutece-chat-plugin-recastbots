@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 package fr.paris.lutece.plugins.recastbots.business;
 
 import javax.validation.constraints.*;
@@ -39,41 +39,42 @@ import java.io.Serializable;
 
 /**
  * This is the business class for the object RecastBot
- */ 
+ */
 public class RecastBot implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
-    
+
     @NotEmpty( message = "#i18n{recastbots.validation.recastbot.BotKey.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{recastbots.validation.recastbot.BotKey.size}" ) 
+    @Size( max = 50, message = "#i18n{recastbots.validation.recastbot.BotKey.size}" )
     private String _strBotKey;
-    
+
     @NotEmpty( message = "#i18n{recastbots.validation.recastbot.Name.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{recastbots.validation.recastbot.Name.size}" ) 
+    @Size( max = 255, message = "#i18n{recastbots.validation.recastbot.Name.size}" )
     private String _strName;
-    
+
     @NotEmpty( message = "#i18n{recastbots.validation.recastbot.Description.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{recastbots.validation.recastbot.Description.size}" ) 
+    @Size( max = 255, message = "#i18n{recastbots.validation.recastbot.Description.size}" )
     private String _strDescription;
-    
-    @Size( max = 255 , message = "#i18n{recastbots.validation.recastbot.AvatarUrl.size}" ) 
+
+    @Size( max = 255, message = "#i18n{recastbots.validation.recastbot.AvatarUrl.size}" )
     private String _strAvatarUrl;
-    
+
     @NotEmpty( message = "#i18n{recastbots.validation.recastbot.Language.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{recastbots.validation.recastbot.Language.size}" ) 
+    @Size( max = 50, message = "#i18n{recastbots.validation.recastbot.Language.size}" )
     private String _strLanguage;
-    
+
     private int _nBotStatus;
-    
+
     @NotEmpty( message = "#i18n{recastbots.validation.recastbot.Token.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{recastbots.validation.recastbot.Token.size}" ) 
+    @Size( max = 255, message = "#i18n{recastbots.validation.recastbot.Token.size}" )
     private String _strToken;
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
     public int getId( )
@@ -83,15 +84,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the Id
-     * @param nId The Id
-     */ 
+     * 
+     * @param nId
+     *            The Id
+     */
     public void setId( int nId )
     {
         _nId = nId;
     }
-    
+
     /**
      * Returns the BotKey
+     * 
      * @return The BotKey
      */
     public String getBotKey( )
@@ -101,15 +105,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the BotKey
-     * @param strBotKey The BotKey
-     */ 
+     * 
+     * @param strBotKey
+     *            The BotKey
+     */
     public void setBotKey( String strBotKey )
     {
         _strBotKey = strBotKey;
     }
-    
+
     /**
      * Returns the Name
+     * 
      * @return The Name
      */
     public String getName( )
@@ -119,15 +126,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the Name
-     * @param strName The Name
-     */ 
+     * 
+     * @param strName
+     *            The Name
+     */
     public void setName( String strName )
     {
         _strName = strName;
     }
-    
+
     /**
      * Returns the Description
+     * 
      * @return The Description
      */
     public String getDescription( )
@@ -137,15 +147,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the Description
-     * @param strDescription The Description
-     */ 
+     * 
+     * @param strDescription
+     *            The Description
+     */
     public void setDescription( String strDescription )
     {
         _strDescription = strDescription;
     }
-    
+
     /**
      * Returns the AvatarUrl
+     * 
      * @return The AvatarUrl
      */
     public String getAvatarUrl( )
@@ -155,15 +168,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the AvatarUrl
-     * @param strAvatarUrl The AvatarUrl
-     */ 
+     * 
+     * @param strAvatarUrl
+     *            The AvatarUrl
+     */
     public void setAvatarUrl( String strAvatarUrl )
     {
         _strAvatarUrl = strAvatarUrl;
     }
-    
+
     /**
      * Returns the Language
+     * 
      * @return The Language
      */
     public String getLanguage( )
@@ -173,15 +189,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the Language
-     * @param strLanguage The Language
-     */ 
+     * 
+     * @param strLanguage
+     *            The Language
+     */
     public void setLanguage( String strLanguage )
     {
         _strLanguage = strLanguage;
     }
-    
+
     /**
      * Returns the BotStatus
+     * 
      * @return The BotStatus
      */
     public int getBotStatus( )
@@ -191,15 +210,18 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the BotStatus
-     * @param nBotStatus The BotStatus
-     */ 
+     * 
+     * @param nBotStatus
+     *            The BotStatus
+     */
     public void setBotStatus( int nBotStatus )
     {
         _nBotStatus = nBotStatus;
     }
-    
+
     /**
      * Returns the Token
+     * 
      * @return The Token
      */
     public String getToken( )
@@ -209,8 +231,10 @@ public class RecastBot implements Serializable
 
     /**
      * Sets the Token
-     * @param strToken The Token
-     */ 
+     * 
+     * @param strToken
+     *            The Token
+     */
     public void setToken( String strToken )
     {
         _strToken = strToken;

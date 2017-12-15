@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.recastbots.service;
 
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
@@ -44,32 +43,34 @@ import java.util.Map;
 /**
  * LanguageService
  */
-public class LanguageService 
+public class LanguageService
 {
     private static final String PROPERTY_LANGUAGES = "recastbots.languages";
-    
-    private static Map<String, ReferenceList> _mapLanguages = new HashMap<>(); 
-    
+
+    private static Map<String, ReferenceList> _mapLanguages = new HashMap<>( );
+
     /**
      * Gets a list of available languages
-     * @param locale The display language
+     * 
+     * @param locale
+     *            The display language
      * @return The list
      */
     public static ReferenceList getLanguages( Locale locale )
     {
-        String strLanguage = locale.getLanguage();
+        String strLanguage = locale.getLanguage( );
         ReferenceList list = _mapLanguages.get( strLanguage );
-        if( list == null )
+        if ( list == null )
         {
-            String[] languages = AppPropertiesService.getProperty( PROPERTY_LANGUAGES ).split( "," );
-            list = new ReferenceList();
-            for( String strLang : languages )
+            String [ ] languages = AppPropertiesService.getProperty( PROPERTY_LANGUAGES ).split( "," );
+            list = new ReferenceList( );
+            for ( String strLang : languages )
             {
-                for( Locale loc : Locale.getAvailableLocales())
+                for ( Locale loc : Locale.getAvailableLocales( ) )
                 {
-                    if( strLang.equalsIgnoreCase( loc.getLanguage()))
+                    if ( strLang.equalsIgnoreCase( loc.getLanguage( ) ) )
                     {
-                        list.addItem( strLang  , loc.getDisplayLanguage( locale ));
+                        list.addItem( strLang, loc.getDisplayLanguage( locale ) );
                         break;
                     }
                 }
