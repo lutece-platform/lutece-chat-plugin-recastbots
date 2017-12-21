@@ -40,15 +40,13 @@ import fr.paris.lutece.plugins.recast.business.DialogResponse;
 import fr.paris.lutece.plugins.recast.business.Message;
 import fr.paris.lutece.plugins.recast.service.BotMessageRenderer;
 import fr.paris.lutece.plugins.recast.service.RecastDialogService;
-import fr.paris.lutece.plugins.recast.service.renderers.DefaultCardRenderer;
-import fr.paris.lutece.plugins.recast.service.renderers.DefaultPictureRenderer;
-import fr.paris.lutece.plugins.recast.service.renderers.DefaultTextRenderer;
+import fr.paris.lutece.plugins.recast.service.RenderersMap;
 import fr.paris.lutece.plugins.recastbots.business.RecastBot;
+import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.util.httpaccess.HttpAccessException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -59,6 +57,7 @@ import java.util.Map;
 public class BotInstance implements ChatBot
 {
     private static final String DEFAULT_AVATAR = "images/skin/plugins/recastbots/default_avatar.png";
+    private static final String BEAN_RENDERERS_MAP = "recastbots.mapRenderers";
 
     private String _strKey;
     private String _strName;
@@ -83,11 +82,9 @@ public class BotInstance implements ChatBot
         _strLanguage = bot.getLanguage( );
         _strAvatarUrl = bot.getAvatarUrl( );
         _strToken = bot.getToken( );
-        _mapRenderers = new HashMap<>( );
 
-        _mapRenderers.put( DefaultTextRenderer.CONTENT_TYPE, new DefaultTextRenderer( ) );
-        _mapRenderers.put( DefaultPictureRenderer.CONTENT_TYPE, new DefaultPictureRenderer( ) );
-        _mapRenderers.put( DefaultCardRenderer.CONTENT_TYPE, new DefaultCardRenderer( ) );
+         RenderersMap renderers = SpringContextService.getBean( BEAN_RENDERERS_MAP );
+         _mapRenderers =renderers.getMap();
 
     }
 

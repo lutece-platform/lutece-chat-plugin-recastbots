@@ -2,9 +2,24 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd" 
+>
 
     <bean id="recastbots.recastBotDAO" class="fr.paris.lutece.plugins.recastbots.business.RecastBotDAO" />
 
-
+    <!--  Renderers Map --> 
+    
+    <bean id="recastbots.mapRenderers" class="fr.paris.lutece.plugins.recast.service.RenderersMap">
+        <property name="map">
+            <map>
+                <entry key="text" value-ref="recast.renderer.Text" />
+                <entry key="picture" value-ref="recast.renderer.Picture" />
+                <entry key="video" value-ref="recast.renderer.Video" />
+                <entry key="card" value-ref="recast.renderer.Card" />
+                <entry key="quickReplies" value-ref="recast.renderer.QuickReplies" />
+            </map>
+        </property>
+    </bean>
+    
 </beans>
