@@ -148,9 +148,11 @@ public class BotInstance implements ChatBot
         List<BotPost> listMessages = new ArrayList<>( );
         DialogResponse response = null;
 
+        String strMessageForBot = extractMessageForBot( strMessage ); 
+        
         try
         {
-            response = RecastDialogService.getDialogResponse( strMessage, strConversationId, _strToken, _strLanguage );
+            response = RecastDialogService.getDialogResponse( strMessageForBot, strConversationId, _strToken, _strLanguage );
         }
         catch( IOException | HttpAccessException ex )
         {
@@ -188,6 +190,21 @@ public class BotInstance implements ChatBot
     public void setStandalone( boolean bStandalone )
     {
         _bStandalone = bStandalone;
+    }
+
+    /**
+     * Extract from the message the
+     * @param strMessage The input message
+     * @return The output message
+     */
+    private String extractMessageForBot( String strMessage )
+    {
+        int nPos = strMessage.indexOf( '|' );
+        if( nPos > 0 )
+        {
+            return strMessage.substring( nPos + 1 );
+        }
+        return strMessage;
     }
 
 }
