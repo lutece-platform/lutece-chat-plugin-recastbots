@@ -48,11 +48,11 @@ import java.util.List;
 public final class RecastBotDAO implements IRecastBotDAO
 {
     // Constants
-    private static final String SQL_QUERY_SELECT = "SELECT id_recast_bot, bot_key, name, description, avatar_url, language, bot_status, token FROM recastbots_bot WHERE id_recast_bot = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO recastbots_bot ( bot_key, name, description, avatar_url, language, bot_status, token ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_recast_bot, bot_key, name, description, avatar_url, language, bot_status, token, is_standalone, welcome_message FROM recastbots_bot WHERE id_recast_bot = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO recastbots_bot ( bot_key, name, description, avatar_url, language, bot_status, token, is_standalone, welcome_message ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM recastbots_bot WHERE id_recast_bot = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE recastbots_bot SET id_recast_bot = ?, bot_key = ?, name = ?, description = ?, avatar_url = ?, language = ?, bot_status = ?, token = ? WHERE id_recast_bot = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_recast_bot, bot_key, name, description, avatar_url, language, bot_status, token FROM recastbots_bot";
+    private static final String SQL_QUERY_UPDATE = "UPDATE recastbots_bot SET id_recast_bot = ?, bot_key = ?, name = ?, description = ?, avatar_url = ?, language = ?, bot_status = ?, token = ?, is_standalone = ?, welcome_message = ? WHERE id_recast_bot = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_recast_bot, bot_key, name, description, avatar_url, language, bot_status, token, is_standalone, welcome_message FROM recastbots_bot";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_recast_bot FROM recastbots_bot";
 
     /**
@@ -72,7 +72,8 @@ public final class RecastBotDAO implements IRecastBotDAO
             daoUtil.setString( nIndex++, recastBot.getLanguage( ) );
             daoUtil.setInt( nIndex++, recastBot.getBotStatus( ) );
             daoUtil.setString( nIndex++, recastBot.getToken( ) );
-
+            daoUtil.setInt( nIndex++, recastBot.getStandalone( ) );
+            daoUtil.setString( nIndex++, recastBot.getWelcomeMessage( ) );
             daoUtil.executeUpdate( );
             if ( daoUtil.nextGeneratedKey( ) )
             {
@@ -109,6 +110,8 @@ public final class RecastBotDAO implements IRecastBotDAO
             recastBot.setLanguage( daoUtil.getString( nIndex++ ) );
             recastBot.setBotStatus( daoUtil.getInt( nIndex++ ) );
             recastBot.setToken( daoUtil.getString( nIndex++ ) );
+            recastBot.setStandalone( daoUtil.getInt( nIndex++ ) );
+            recastBot.setWelcomeMessage( daoUtil.getString( nIndex++ ) );
         }
 
         daoUtil.free( );
@@ -144,6 +147,8 @@ public final class RecastBotDAO implements IRecastBotDAO
         daoUtil.setString( nIndex++, recastBot.getLanguage( ) );
         daoUtil.setInt( nIndex++, recastBot.getBotStatus( ) );
         daoUtil.setString( nIndex++, recastBot.getToken( ) );
+        daoUtil.setInt( nIndex++, recastBot.getStandalone( ) );
+        daoUtil.setString( nIndex++, recastBot.getWelcomeMessage( ) );
         daoUtil.setInt( nIndex, recastBot.getId( ) );
 
         daoUtil.executeUpdate( );
@@ -173,6 +178,8 @@ public final class RecastBotDAO implements IRecastBotDAO
             recastBot.setLanguage( daoUtil.getString( nIndex++ ) );
             recastBot.setBotStatus( daoUtil.getInt( nIndex++ ) );
             recastBot.setToken( daoUtil.getString( nIndex++ ) );
+            recastBot.setStandalone( daoUtil.getInt( nIndex++ ) );
+            recastBot.setWelcomeMessage( daoUtil.getString( nIndex++ ) );
 
             recastBotList.add( recastBot );
         }

@@ -27,6 +27,12 @@
                 <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelToken}' helpKey='#i18n{recastbots.create_recastbot.labelToken.help}' mandatory=true>
                         <@input type='text' name='token' value='${recastbot.token!\'\'}' />
                 </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelBotMode}' helpKey='#i18n{recastbots.create_recastbot.labelBotMode.help}' mandatory=true>
+                        <@select name='standalone' items=modes_list default_value='${recastbot.standalone}' />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{recastbots.create_recastbot.labelWelcome}' helpKey='#i18n{recastbots.create_recastbot.labelWelcomeMessage.help}' mandatory=false>
+                        <@input type='text' name='welcome_message' value='${recastbot.welcomeMessage!\'\'}' />
+                </@formGroup>
                 <@actionButtons button1Name="action_createRecastBot" button2Name="view_manageRecastBot"/>
         </@tform>
     </@boxBody>

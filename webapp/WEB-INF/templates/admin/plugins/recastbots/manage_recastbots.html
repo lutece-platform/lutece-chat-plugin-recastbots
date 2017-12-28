@@ -17,6 +17,7 @@
             <th>#i18n{recastbots.manage_recastbots.columnBotKey}</th>
             <th>#i18n{recastbots.manage_recastbots.columnName}</th>
             <th>#i18n{recastbots.manage_recastbots.columnDescription}</th>
+            <th>#i18n{recastbots.manage_recastbots.columnStandalone}</th>
             <th>#i18n{recastbots.manage_recastbots.columnAvatarUrl}</th>
             <th>#i18n{recastbots.manage_recastbots.columnLanguage}</th>
             <th>#i18n{recastbots.manage_recastbots.columnBotStatus}</th>
@@ -35,6 +36,13 @@
             </td>
             <td>
                 ${recastbot.description}
+            </td>
+            <td>
+                <#if recastbot.standalone != 0 >
+                    #i18n{recastbots.mode.standalone}
+                <#else>
+                    #i18n{recastbots.mode.standard}
+                </#if>
             </td>
             <td>
                 ${recastbot.avatarUrl}

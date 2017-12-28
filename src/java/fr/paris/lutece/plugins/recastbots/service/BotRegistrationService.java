@@ -49,8 +49,13 @@ public class BotRegistrationService
 
     private static final String MESSAGE_STATUS_ENABLED = "recastbots.bot_status.enabled";
     private static final String MESSAGE_STATUS_DISABLED = "recastbots.bot_status.disabled";
+    private static final String MESSAGE_MODE_STANDARD = "recastbots.mode.standard";
+    private static final String MESSAGE_MODE_STANDALONE = "recastbots.mode.standalone";
+
     private static final int STATUS_ENABLED = 1;
     private static final int STATUS_DISABLED = 0;
+    private static final int MODE_STANDARD = 0;
+    private static final int MODE_STANDALONE = 1;
 
     private static ReferenceList _listStatus;
 
@@ -109,5 +114,15 @@ public class BotRegistrationService
     public static void unregister( String strBotKey )
     {
         BotService.unregister( strBotKey );
+    }
+
+    public static ReferenceList getModes( Locale locale )
+    {
+        ReferenceList list = new ReferenceList( );
+
+        list.addItem( MODE_STANDARD, I18nService.getLocalizedString( MESSAGE_MODE_STANDARD, locale ) );
+        list.addItem( MODE_STANDALONE, I18nService.getLocalizedString( MESSAGE_MODE_STANDALONE, locale ) );
+
+        return list;
     }
 }

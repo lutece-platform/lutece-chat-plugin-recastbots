@@ -73,6 +73,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
     private static final String MARK_STATUS_LIST = "status_list";
     private static final String MARK_LANGUAGES_LIST = "languages_list";
     private static final String MARK_RECASTBOT = "recastbot";
+    private static final String MARK_MODES_LIST = "modes_list";
 
     private static final String JSP_MANAGE_RECASTBOTS = "jsp/admin/plugins/recastbots/ManageRecastBots.jsp";
 
@@ -134,6 +135,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
         model.put( MARK_RECASTBOT, _recastbot );
         model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale( ) ) );
         model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale( ) ) );
+        model.put( MARK_MODES_LIST, BotRegistrationService.getModes( getLocale( ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_RECASTBOT, TEMPLATE_CREATE_RECASTBOT, model );
     }
@@ -219,6 +221,7 @@ public class RecastBotJspBean extends AbstractManageBotsJspBean
         model.put( MARK_RECASTBOT, _recastbot );
         model.put( MARK_STATUS_LIST, BotRegistrationService.getBotsStatusList( getLocale( ) ) );
         model.put( MARK_LANGUAGES_LIST, LanguageService.getLanguages( getLocale( ) ) );
+        model.put( MARK_MODES_LIST, BotRegistrationService.getModes( getLocale( ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_RECASTBOT, TEMPLATE_MODIFY_RECASTBOT, model );
     }

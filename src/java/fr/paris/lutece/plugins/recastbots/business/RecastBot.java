@@ -72,6 +72,10 @@ public class RecastBot implements Serializable
     @Size( max = 255, message = "#i18n{recastbots.validation.recastbot.Token.size}" )
     private String _strToken;
 
+    private int _nStandalone;
+
+    private String _strWelcomeMessage;
+
     /**
      * Returns the Id
      * 
@@ -239,4 +243,45 @@ public class RecastBot implements Serializable
     {
         _strToken = strToken;
     }
+
+    /**
+     * {@inheritDoc }
+     */
+    public int getStandalone( )
+    {
+        return _nStandalone;
+    }
+
+    /**
+     * Sets the Standalone
+     *
+     * @param nStandalone
+     *            The Standalone
+     */
+    public void setStandalone( int nStandalone )
+    {
+        _nStandalone = nStandalone;
+    }
+
+    /**
+     * Returns the WelcomeMessage
+     * 
+     * @return The WelcomeMessage
+     */
+    public String getWelcomeMessage( )
+    {
+        return _strWelcomeMessage;
+    }
+
+    /**
+     * Sets the WelcomeMessage
+     * 
+     * @param strWelcomeMessage
+     *            The WelcomeMessage
+     */
+    public void setWelcomeMessage( String strWelcomeMessage )
+    {
+        _strWelcomeMessage = strWelcomeMessage;
+    }
+
 }

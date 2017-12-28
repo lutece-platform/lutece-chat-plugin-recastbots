@@ -66,6 +66,7 @@ public class BotInstance implements ChatBot
     private String _strToken;
     private String _strLanguage;
     private boolean _bStandalone;
+    private String _strWelcomeMessage;
     private Map<String, BotMessageRenderer> _mapRenderers;
 
     /**
@@ -82,9 +83,11 @@ public class BotInstance implements ChatBot
         _strLanguage = bot.getLanguage( );
         _strAvatarUrl = bot.getAvatarUrl( );
         _strToken = bot.getToken( );
+        _bStandalone = bot.getStandalone( ) != 0;
+        _strWelcomeMessage = bot.getWelcomeMessage( );
 
-         RenderersMap renderers = SpringContextService.getBean( BEAN_RENDERERS_MAP );
-         _mapRenderers =renderers.getMap();
+        RenderersMap renderers = SpringContextService.getBean( BEAN_RENDERERS_MAP );
+        _mapRenderers = renderers.getMap( );
 
     }
 
@@ -148,8 +151,8 @@ public class BotInstance implements ChatBot
         List<BotPost> listMessages = new ArrayList<>( );
         DialogResponse response = null;
 
-        String strMessageForBot = extractMessageForBot( strMessage ); 
-        
+        String strMessageForBot = extractMessageForBot( strMessage );
+
         try
         {
             response = RecastDialogService.getDialogResponse( strMessageForBot, strConversationId, _strToken, _strLanguage );
@@ -193,14 +196,38 @@ public class BotInstance implements ChatBot
     }
 
     /**
+     * Returns the WelcomeMessage
+     * 
+     * @return The WelcomeMessage
+     */
+    @Override
+    public String getWelcomeMessage( )
+    {
+        return _strWelcomeMessage;
+    }
+
+    /**
+     * Sets the WelcomeMessage
+     * 
+     * @param strWelcomeMessage
+     *            The WelcomeMessage
+     */
+    public void setWelcomeMessage( String strWelcomeMessage )
+    {
+        _strWelcomeMessage = strWelcomeMessage;
+    }
+
+    /**
      * Extract from the message the
-     * @param strMessage The input message
+     * 
+     * @param strMessage
+     *            The input message
      * @return The output message
      */
     private String extractMessageForBot( String strMessage )
     {
         int nPos = strMessage.indexOf( '|' );
-        if( nPos > 0 )
+        if ( nPos > 0 )
         {
             return strMessage.substring( nPos + 1 );
         }
