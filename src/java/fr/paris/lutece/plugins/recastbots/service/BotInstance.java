@@ -234,4 +234,14 @@ public class BotInstance implements ChatBot
         return strMessage;
     }
 
+    /**
+     * Reset the conversation
+     * @param strConversationId The conversation ID
+     */
+    @Override
+    public void reset( String strConversationId )
+    {
+        
+    }
+
 }
