@@ -44,13 +44,13 @@
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-chatbot</artifactId>
-            <version>[0.0.1,)</version>
+            <version>[1.0.2,)</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-recast</artifactId>
-            <version>[0.0.1,)</version>
+            <version>[1.0.2,)</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
