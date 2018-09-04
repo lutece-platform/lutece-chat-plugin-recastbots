@@ -1,2 +1,4 @@
 INSERT INTO recastbots_bot (id_recast_bot, bot_key, name, description, avatar_url, language, bot_status, token) VALUES
-	(1, 'lutece', 'Lutece', 'A propos de Lutece', '', 'fr', 1, '7c63de7b6afdbdc4808f52dfe4d55548');
+	(1, 'lutece_fr', 'A propos de Lutece', 'Ce chatbot utilise la plateforme Recast.AI et son traitement de langage naturel pour répondre à vos questions sur Lutece.La configuration du bot est accessible à https://recast.ai/mairiedeparis/lutece-bot-demo', '', 'fr', 1, 'd60f56b1397c645eb84e78a18adf0445'),
+	(2, 'lutece_en', 'About Lutece', 'This chatbot is based on the Recast.AI platform and its Natural Language Processing. The bot definition is available at  https://recast.ai/mairiedeparis/lutece-bot-demo', '', 'en', 1, 'd60f56b1397c645eb84e78a18adf0445')
+;
